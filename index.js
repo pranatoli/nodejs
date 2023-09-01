@@ -26,8 +26,9 @@ app.get('/users/:gender', function (req, res) {
 })
 
 app.get('/filtredUsers', function (req, res) {
-    let min = req.query.min
-    let max = req.query.max
+    const { min, max } = req.query
+    // let min = req.query.min
+    // let max = req.query.max
     const filtredAge = users.filter((i) => i.age >= min && i.age <= max)
     res.send(filtredAge)
 })
