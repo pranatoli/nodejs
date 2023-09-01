@@ -1,6 +1,8 @@
+require('dotenv').config()
+
 let express = require('express')
 let app = express()
-const port = 3000
+const port = process.env.PORT
 const bodyParser = require('body-parser')
 
 const users = [
@@ -65,6 +67,6 @@ app.delete('/user/:id', function (req, res) {
     } else res.send(false)
 })
 
-app.listen(port, () => console.log('server started'))
+app.listen(port, () => console.log(`server started on port ${port}`))
 
 // console.log(JSON.stringify({ id: 1, name: "Kate", isMan: false, age: 34 }));
