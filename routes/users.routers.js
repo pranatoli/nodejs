@@ -1,5 +1,5 @@
-const express = require("express")
-const router = express.Router()
+const express = require('express');
+const router = express.Router();
 
 const users = [
     { id: 1, name: "Pasha", isMan: true, age: 25 },
@@ -9,7 +9,7 @@ const users = [
     { id: 5, name: "Kate", isMan: false, age: 34 },
 ]
 
-router.get('/users', function (req, res) {
+router.get('/', function (req, res) {
     res.send(users)
 })
 
