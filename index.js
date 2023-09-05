@@ -1,6 +1,7 @@
 let express = require('express')
 let app = express()
 const port = 3000
+const routes = require('./routes/index')
 const bodyParser = require('body-parser')
 
 const users = [
@@ -14,9 +15,12 @@ const users = [
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-app.get('/users', function (req, res) {
-    res.send(users)
-})
+app.use('/api', routes)
+
+
+// app.get('/users', function (req, res) {
+//     res.send(users)
+// })
 
 app.get('/users/:gender', function (req, res) {
     const filterUsers = users.filter((i) => i.isMan == req.body.isMan)
