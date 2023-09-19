@@ -37,5 +37,3 @@ app.use('/api', routes)
 // })
 
 app.listen(port, () => console.log('server started on port ' + port))
-
-// console.log(JSON.stringify({ id: 1, name: "Kate", isMan: false, age: 34 }));
