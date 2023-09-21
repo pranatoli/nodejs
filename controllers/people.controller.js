@@ -1,3 +1,5 @@
+const PeopleService = require('../services/people.services');
+
 class People {
     constructor(id, name, isMan, age) {
         this.id = id
@@ -7,23 +9,20 @@ class People {
     }
 }
 
-const people = [
-    { id: 1, name: "Pasha", isMan: true, age: 25 },
-    { id: 2, name: "Ivan", isMan: true, age: 5 },
-    { id: 3, name: "Dima", isMan: true, age: 75 }
-];
-
 class PeopleController {
-    getPeople() {
+    async getPeople() {
+        const people = await PeopleService.getPeople()
         return people;
     }
-    createPeople(req) {
+    async createPeople(req) {
+        const people = await PeopleService.getPeople()
         const { id, name, isMan, age } = req.body
         const user = new People(id, name, isMan, age)
         people.push(user)
         return people.at(-1)
     }
-    updatePeople(req) {
+    async updatePeople(req) {
+        const people = await PeopleService.getPeople()
         const response = { status: 200, send: people }
         const id = people.findIndex((i) => i.id == req.params.id)
         if (id != -1) {
@@ -38,7 +37,8 @@ class PeopleController {
         }
     }
 
-    deletePeople(req) {
+    async deletePeople(req) {
+        const people = await PeopleService.getPeople()
         const id = people.findIndex((i) => i.id == req.query.id)
         if (id != -1) {
             people.splice(id, 1)

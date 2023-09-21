@@ -2,18 +2,18 @@ const express = require('express');
 const router = express.Router();
 const PeopleController = require('../controllers/people.controller');
 
-router.get('/', function (req, res) {
+router.get('/', async (req, res) => {
     try {
-        const people = PeopleController.getPeople()
+        const people = await PeopleController.getPeople()
         res.send(people)
     } catch (error) {
         res.send('error: ' + error.message)
     }
 })
 
-router.post('/user', function (req, res) {
+router.post('/user', async (req, res) => {
     try {
-        const newPeople = PeopleController.createPeople(req)
+        const newPeople = await PeopleController.createPeople(req)
         res.status(201)
         res.send(newPeople)
     } catch (error) {
@@ -21,9 +21,9 @@ router.post('/user', function (req, res) {
     }
 })
 
-router.put('/user/:id', function (req, res) {
+router.put('/user/:id', async (req, res) => {
     try {
-        const answer = PeopleController.updatePeople(req)
+        const answer = await PeopleController.updatePeople(req)
         res.status(answer.status)
         res.send(answer.send)
     } catch (error) {
@@ -31,9 +31,9 @@ router.put('/user/:id', function (req, res) {
     }
 })
 
-router.delete('/user/:id', function (req, res) {
+router.delete('/user/:id', async (req, res) => {
     try {
-        const response = PeopleController.deletePeople(req)
+        const response = await PeopleController.deletePeople(req)
         res.send(response)
     } catch (error) {
         res.send('error: ' + error.message)

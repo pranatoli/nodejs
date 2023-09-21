@@ -1,3 +1,5 @@
+const MessageService = require('../services/message.services')
+
 class Message {
     constructor(id, text) {
         this.id = id
@@ -5,24 +7,21 @@ class Message {
     }
 }
 
-const message = [
-    { id: 1, text: 'asfdsfsdf' },
-    { id: 2, text: 'dfdgdfg' },
-    { id: 3, text: 'dfsdkfskfo' }
-];
-
 class MessageController {
-    getMessage() {
+    async getMessage() {
+        const message = await MessageService.getMessage()
         return message
     }
-    newMessage(req) {
+    async newMessage(req) {
+        const message = await MessageService.getMessage()
         const { id, text } = req.body
         const txt = new Message(id, text)
         message.push(txt)
         const response = { status: 200, send: message }
         return response
     }
-    updateMessage(req) {
+    async updateMessage(req) {
+        const message = await MessageService.getMessage()
         const response = { status: 200, send: message }
         const id = message.findIndex((i) => i.id == req.params.id)
         if (id != -1) {
@@ -37,7 +36,8 @@ class MessageController {
         }
         return response
     }
-    deleteMessage(req) {
+    async deleteMessage(req) {
+        const message = await MessageService.getMessage()
         const id = message.findIndex((i) => i.id == req.query.id)
         if (id != -1) {
             message.splice(id, 1)
